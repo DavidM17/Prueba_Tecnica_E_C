@@ -1,0 +1,76 @@
+<div class="row">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <form #employeeForm="ngForm" (ngSubmit)="addEmployee(employeeForm)">
+                    <h3>Empleado</h3>
+                    <input type="hidden" name="_id" [(ngModel)]="employeeService.selectedEmployee._id">
+                    <div class="form-group">
+                        <input type="text" name="name" [(ngModel)]="employeeService.selectedEmployee.name" class="form-control" placeholder="Ingrese Nombre">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="lastname" [(ngModel)]="employeeService.selectedEmployee.lastname" class="form-control" placeholder="Ingrese Apellido">
+                    </div>
+                    <div class="form-group">
+                        <input type="number" name="identification" [(ngModel)]="employeeService.selectedEmployee.identification" class="form-control" placeholder="Ingrese Identificación">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="contract_type" [(ngModel)]="employeeService.selectedEmployee.contract_type" class="form-control" placeholder="Ingrese Tipo de Contrato">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="birthday" [(ngModel)]="employeeService.selectedEmployee.birthday" class="form-control" placeholder="Ingrese Fecha de Nacimiento DD/MM/YYYY">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="address" [(ngModel)]="employeeService.selectedEmployee.address" class="form-control" placeholder="Ingrese Dirección">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="phone" [(ngModel)]="employeeService.selectedEmployee.phone" class="form-control" placeholder="Ingrese Teléfono">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="email" [(ngModel)]="employeeService.selectedEmployee.email" class="form-control" placeholder="Ingrese Email">
+                    </div>
+                    
+                    <button class="btn btn-primary">
+                        Guardar
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>
+                        Nombre Empleado
+                    </th>
+                    <th>
+                        Apellido Empleado
+                    </th>
+                    <th>
+                        Identificación
+                    </th>
+                    <th>
+                        Contrato
+                    </th>
+                    <th>
+                        Acciones
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let employee of employeeService.employees">
+                    <td>{{ employee.name }}</td>
+                    <td>{{ employee.lastname }}</td>
+                    <td>{{ employee.identification }}</td>
+                    <td>{{ employee.contract_type }}</td>
+                    <td>
+                        <button class="btn btn-secondary btn-sm" (click)="editEmployee(employee)">Editar</button>
+                        <button class="btn btn-danger btn-sm" (click)="deleteEmployee(employee._id)">Eliminar</button>
+                    </td>
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

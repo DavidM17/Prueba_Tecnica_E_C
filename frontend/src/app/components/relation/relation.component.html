@@ -1,0 +1,130 @@
+<button type="button" class="btn btn-primary" (click)="hideView()">Atras</button>
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h3>Empleados de {{contractor.name}} {{contractor.lastname}}</h3>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>
+                                Empleado
+                            </th>
+    
+                            <th>
+                                Identificación
+                            </th>
+                            <th>
+                                Horas Asignadas
+                            </th>
+                            <th>
+                                Horas Trabajadas
+                            </th>
+                            <th>
+                                Acciones
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let relation of relationService.relations">
+                            <td>{{ relation.employee }}</td>
+                            <td>{{ relation.identification }}</td>
+                            <td>{{ relation.working_time }}</td>
+                            <td>{{ relation.worked_time }}</td>
+                            <td>
+                                <button class="btn btn-secundary btn-sm" (click)="editRelation(relation)" data-toggle="modal" data-target="#exampleModalScrollable">Editar</button>
+                                <button class="btn btn-danger btn-sm" (click)="deleteRelation(relation._id)">Eliminar</button>
+                                
+                            </td>
+        
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h3>Empleados Disponibles</h3>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>
+                                Nombre Empleado
+                            </th>
+                            <th>
+                                Apellido Empleado
+                            </th>
+                            <th>
+                                Identificación
+                            </th>
+                            <th>
+                                Contrato
+                            </th>
+                            <th>
+                                Acciones
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr *ngFor="let employee of relationService.employees">
+                            <td>{{ employee.name }}</td>
+                            <td>{{ employee.lastname }}</td>
+                            <td>{{ employee.identification }}</td>
+                            <td>{{ employee.contract_type }}</td>
+                            <td>
+                                <button class="btn btn-primary btn-sm" (click)="addEmployee(employee)" data-toggle="modal" data-target="#exampleModalScrollable">Agregar</button>
+                                
+                            </td>
+        
+                        </tr>
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalScrollableTitle">Asignación de Empleado</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form #relationForm="ngForm" (ngSubmit)="addRelation(relationForm)">
+               
+                
+                <input type="hidden" name="employee_id" [(ngModel)]="relationService.selectedRelation.employee_id">
+
+                
+                <div class="form-group">
+                    <input type="number" name="working_time" [(ngModel)]="relationService.selectedRelation.working_time" class="form-control" placeholder="Horas a Trabajar">
+                </div>
+                <div class="form-group">
+                    <input type="number" name="worked_time" [(ngModel)]="relationService.selectedRelation.worked_time" class="form-control" placeholder="Horas Trabajadas">
+                </div>
+                <div class="form-group">
+                    <input type="text" name="start" [(ngModel)]="relationService.selectedRelation.start" class="form-control" placeholder="Inicio de la Obra DD/MM/YYYY">
+                </div>
+                <div class="form-group">
+                    <input type="text" name="work_name" [(ngModel)]="relationService.selectedRelation.work_name" class="form-control" placeholder="Nombre de la Obra">
+                </div>
+                
+
+                
+            </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" (click)="addRelation(relationForm)" data-dismiss="modal">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>

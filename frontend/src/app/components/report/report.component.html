@@ -1,0 +1,38 @@
+<div class="card">
+    <div class="card-body">
+        <h3>Informe Contratista-Empleado</h3>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>
+                        Contratista
+                    </th>
+                    <th>
+                        Empleado
+                    </th>
+                    <th>
+                        Tiempo Trabajado
+                    </th>
+                    <th>
+                        Horas Restantes
+                    </th>
+                    <th>
+                        Obra
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr *ngFor="let relation of relations">
+                    <td>{{ relation.contractor }}</td>
+                    <td>{{ relation.employee }} </td>
+                    <td>{{ relation.worked_time }}</td>
+                    <td>{{ sum(relation.working_time,relation.worked_time) }}</td>
+                    <td>{{ relation.work_name }}</td>
+                
+                </tr>
+                
+            </tbody>
+        </table>
+    </div>
+</div>

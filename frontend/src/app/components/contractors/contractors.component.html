@@ -1,0 +1,83 @@
+
+<div *ngIf="!value_hide" class="row">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <form #contractorForm="ngForm" (ngSubmit)="addContractor(contractorForm)">
+                    <h3>Contratista</h3>
+                    <input type="hidden" name="_id" [(ngModel)]="contractorService.selectedContractor._id">
+                    <div class="form-group">
+                        <input type="text" name="name" [(ngModel)]="contractorService.selectedContractor.name" class="form-control" placeholder="Ingrese Nombre">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="lastname" [(ngModel)]="contractorService.selectedContractor.lastname" class="form-control" placeholder="Ingrese Apellido">
+                    </div>
+                    <div class="form-group">
+                        <input type="number" name="identification" [(ngModel)]="contractorService.selectedContractor.identification" class="form-control" placeholder="Ingrese Identificación">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="company" [(ngModel)]="contractorService.selectedContractor.company" class="form-control" placeholder="Ingrese Compañía">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="birthday" [(ngModel)]="contractorService.selectedContractor.birthday" class="form-control" placeholder="Ingrese Fecha de Nacimiento DD/MM/YYYY">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="address" [(ngModel)]="contractorService.selectedContractor.address" class="form-control" placeholder="Ingrese Dirección">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="phone" [(ngModel)]="contractorService.selectedContractor.phone" class="form-control" placeholder="Ingrese Teléfono">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="email" [(ngModel)]="contractorService.selectedContractor.email" class="form-control" placeholder="Ingrese Email">
+                    </div>
+                    
+                    <button class="btn btn-primary">
+                        Guardar
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>
+                        Nombre Empleado
+                    </th>
+                    <th>
+                        Apellido Empleado
+                    </th>
+                    <th>
+                        Identificación
+                    </th>
+                    <th>
+                        Compañía
+                    </th>
+                    <th>
+                        Acciones
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let contractor of contractorService.contractors">
+                    <td>{{ contractor.name }}</td>
+                    <td>{{ contractor.lastname }}</td>
+                    <td>{{ contractor.identification }}</td>
+                    <td>{{ contractor.company }}</td>
+                    <td>
+                        <button class="btn btn-secondary btn-sm" (click)="addEmployee(contractor)">Empleados</button>
+                        <button class="btn btn-secondary btn-sm" (click)="editContractor(contractor)">Editar</button>
+                        <button class="btn btn-danger btn-sm" (click)="deleteContractor(contractor._id)">Eliminar</button>
+                    </td>
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div *ngIf="value_hide">
+    <app-relation [contractor]="selectedContractor" (viewchanged)="changeview($event)"></app-relation>
+</div>
+
